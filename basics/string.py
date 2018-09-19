@@ -14,3 +14,14 @@ print('字符串是不是以world结尾:', str1.startswith('world'))
 str2 = '- Carefing'
 str3 = str1.title() + ' ' + str2.lower()
 print(str3)
+# 下标及字符串切片
+str4 = 'abc123456'
+print(str4[2])      # c
+print(str4[2:])     # c123456
+print(str4[:5])     # abc12
+print(str4[2:5])    # c12 (not contain 3)
+print(str4[::2])    # ac246
+print(str4[3::2])   # 135
+print(str4[::-1])   # 654321cba
+print(str4[-3:-1])  # 45
+print(str4[5:2:-1]) # 321
