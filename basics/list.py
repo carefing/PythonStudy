@@ -1,3 +1,5 @@
+import sys
+
 def main():
     # initialize
     list1 = [1, 3, 5, 7, 9]
@@ -47,6 +49,20 @@ def main():
     print(fruits4)
     print(fruits5)
     print(fruits6)
+
+    # generate list
+    f = [x for x in range(1, 10)]
+    print(f)
+    f = [x + y for x in 'ABCDE' for y in '1234567']
+    print(f)
+    print('bytes of list:', sys.getsizeof(f))
+    # use Generator
+    f = (x + y for x in 'ABCDE' for y in '1234567')
+    print(f)
+    print('bytes of generator:', sys.getsizeof(f))
+    for val in f:
+        print(val, end=' ')
+    print()
 
 if __name__ == '__main__':
     main()
