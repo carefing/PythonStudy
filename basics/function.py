@@ -1,6 +1,6 @@
 from random import randint
 
-def roll_dice(n = 2):
+def roll_dice(n=2):
     total = 0
     for i in range(n):
         total += randint(1, 6)
