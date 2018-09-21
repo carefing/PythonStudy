@@ -5,21 +5,23 @@ poker game
 from random import randrange
 
 class Card(object):
+    """ 一张牌 """
 
-    def __init__(self, suite, face):
-        self._suite = suite
+    def __init__(self, suit, face):
+        self._suit = suit
         self._face = face
 
     @property
-    def suite(self):
-        return self._suite
+    def suit(self):
+        return self._suit
 
     @property
     def face(self):
         return self._face
 
     def __str__(self):
-        all_suites = ('spade', 'heart', 'club', 'diamond')
+        all_suits = ('spade', 'heart', 'club', 'diamond')
+        # all_suits = ('\u2660', '\u2665', '\u2663', '\u2666')
         if self._face == 1:
             face_str = 'A'
         elif self._face == 11:
@@ -30,16 +32,17 @@ class Card(object):
             face_str = 'K'
         else:
             face_str = str(self._face)
-        return '%s%s' % (all_suites[self._suite], face_str)
+        return '%s%s' % (all_suits[self._suit], face_str)
 
 class Poker(object):
+    """ 一副牌 """
 
     def __init__(self):
         self._cards = []
         self._current = 0
-        for suite in range(4):
+        for suit in range(4):
             for face in range(1, 14):
-                card = Card(suite, face)
+                card = Card(suit, face)
                 self._cards.append(card)
 
     @property
@@ -94,7 +97,7 @@ class Player(object):
 
 # 排序规则-先根据花色再根据点数排序
 def get_key(card):
-    return (card.suite, card.face)
+    return (card.suit, card.face)
 
 
 def main():
