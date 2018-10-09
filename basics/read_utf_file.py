@@ -8,6 +8,8 @@ read utf-8 file
 'b'	二进制模式
 't'	文本模式（默认）
 '+'	更新（既可以读又可以写）
+
+关键字 with 在不需要访问文件后将其关闭，这样我们不用调用close()来关闭文件
 """
 
 def main():
@@ -15,16 +17,19 @@ def main():
     try:
         with open(file, 'r', encoding='utf-8') as f:
             print(f.read())
+            # print(f.read().rstrip())
         print('***************************')
         with open(file, 'r', encoding='utf-8') as f:
             for line in f:
                 print(line, end='')
+                # print(line.rstrip())
             print()
         print('***************************')
         with open(file, 'r', encoding='utf-8') as f:
             lines = f.readlines()
             for line in lines:
                 print(line, end='')
+                # print(line.rstrip())
     except FileNotFoundError:
         print('cannot find file:', file)
     except LookupError:
