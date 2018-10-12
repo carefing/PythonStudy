@@ -23,7 +23,8 @@ def create_alien(ai_settings, screen, aliens, alien_number, row_number):
     alien_width = alien.rect.width
     alien.x = alien_width + 2 * alien_width * alien_number
     alien.rect.x = alien.x
-    alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
+    alien.y = float(alien.rect.height + 2 * alien.rect.height * row_number)
+    alien.rect.y = alien.y
     aliens.add(alien)
 
 
@@ -38,6 +39,22 @@ def create_fleet(ai_settings, screen, ship, aliens):
     for row_number in range(number_rows):
         for alien_number in range(number_alien_x):
             create_alien(ai_settings, screen, aliens, alien_number, row_number)
+
+
+def check_fleet_edges(ai_settings, aliens):
+    """有外星人到达边缘时采取相应的措施"""
+    for alien in aliens.sprites():
+        if alien.check_edges():
+            change_fleet_direction(ai_settings, aliens)
+            break
+
+
+def change_fleet_direction(ai_settings, aliens):
+    """将整群外星人下移，并改变他们的方向"""
+    for alien in aliens.sprites():
+        alien.y += ai_settings.fleet_drop_speed
+        alien.rect.y = alien.y
+    ai_settings.fleet_direction *= -1 # 此处动态改变settings中的内容
 
 
 def fire_bullet(ai_settings, screen, ship, bullets):
@@ -101,3 +118,9 @@ def update_bullets(bullets):
     for bullet in bullets.copy():
         if bullet.rect.bottom <=0:
             bullets.remove(bullet)
+
+
+def update_aliens(ai_settings, aliens):
+    """更新外星人群中所有外星人的位置"""
+    check_fleet_edges(ai_settings, aliens)
+    aliens.update()
