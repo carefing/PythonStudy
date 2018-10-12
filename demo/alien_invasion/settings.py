@@ -10,6 +10,7 @@ class Settings(object):
 
         # 飞船的设置
         self.ship_speed_factor = 0.2
+        self.ship_limit = 3
 
         # 子弹设置
         self.bullet_speed_factor = 0.1
